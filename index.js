@@ -3,7 +3,7 @@ const fs = require('fs');
 const { addPath } = require('app-module-path');
 const merge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WebpackCopyAfterBuildPlugin = require('@shopware/webpack-copy-after-build');
+const WebpackCopyAfterBuildPlugin = require('@shopware-ag/webpack-copy-after-build');
 
 const projectRoot = process.env.PROJECT_ROOT || '';
 
