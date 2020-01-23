@@ -78,7 +78,7 @@ class WebpackPluginInjector {
 
         let content;
         if (typeof this.filePath === 'string') {
-            content = WebpackPluginInjector.getPluginDefinitionContent(this.filePath);
+            content = this.getPluginDefinitionContent(this.filePath);
         } else {
             content = this.filePath;
         }
@@ -118,11 +118,10 @@ class WebpackPluginInjector {
     /**
      * Checks if the definition exists, loads it and parses it as JSON.
      *
-     * @static
      * @param {String} definitionFile
      * @return {Object}
      */
-    static getPluginDefinitionContent(definitionFile) {
+    getPluginDefinitionContent(definitionFile) {
         const fullPathDefinitionFile = resolveFromRootPath(definitionFile);
 
         if (!fs.existsSync(fullPathDefinitionFile)) {
@@ -157,7 +156,7 @@ class WebpackPluginInjector {
 
             sections.forEach((section) => {
                 if (pluginDefinition[section] && pluginDefinition[section].entryFilePath) {
-                    const plugin = WebpackPluginInjector.getPluginConfig(pluginName, pluginDefinition, section);
+                    const plugin = this.getPluginConfig(pluginName, pluginDefinition, section);
                     plugins[section].push(plugin);
                 }
             });
@@ -170,13 +169,12 @@ class WebpackPluginInjector {
      * Returns the plugin configuration with sanitized paths. The method also terminates if the plugin contains a custom
      * webpack configuration which we have to merge.
      *
-     * @static
      * @param {String} pluginName
      * @param {Object} pluginDefinition
      * @param {String} section
      * @return {Object}
      */
-    static getPluginConfig(pluginName, pluginDefinition, section) {
+    getPluginConfig(pluginName, pluginDefinition, section) {
         const basePath = resolveFromRootPath(pluginDefinition.basePath);
         const hasCustomWebpackConfig = (pluginDefinition[section].webpack !== null);
         const hasCustomStyleFiles = Object.prototype.hasOwnProperty.call(pluginDefinition[section], 'styleFiles')
