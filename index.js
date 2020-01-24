@@ -72,8 +72,8 @@ class WebpackPluginInjector {
 
         // Include paths for the webpack loaders
         this._includePaths = [
-            resolve('../administration/src'),
-            resolve('../administration/test')
+            resolve('../../../administration/src'),
+            resolve('../../../administration/test')
         ];
 
         let content;
