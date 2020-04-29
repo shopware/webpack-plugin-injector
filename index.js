@@ -241,10 +241,7 @@ class WebpackPluginInjector {
                 this.webpackConfig.entry = {};
             }
 
-            if (process.env.MODE === 'hot' && this.section === 'storefront') {
-                this.webpackConfig.entry.storefront.push(plugin.entryFile);
-                this.webpackConfig.entry.storefront.push(...plugin.styleFiles);
-            } else {
+            if (process.env.MODE !== 'hot' || this.section !== 'storefront') {
                 // Add plugin as a new entry in the webpack config, respect NODE_ENV and insert the 'dev-client' if necessary
                 this.webpackConfig.entry[technicalName] = (this.env === 'development' && this.section === 'administration')
                     ? ['./build/dev-client'].concat(plugin.entryFile)
