@@ -1,6 +1,6 @@
 {
   "name": "@shopware-ag/webpack-plugin-injector",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Injects Shopware Plugins into a Webpack config",
   "main": "index.js",
   "author": "klarstil",
