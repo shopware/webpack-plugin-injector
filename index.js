@@ -228,6 +228,12 @@ class WebpackPluginInjector {
             const name = plugin.pluginName;
             const technicalName = plugin.technicalName;
 
+            if (process.env['SKIP_' + technicalName.toUpperCase().replace(/-/g, '_')]) {
+                this.warn('Webpack Plugin Injector', `Skip plugin "${name}" as a new entry point`);
+
+                return;
+            }
+
             // Params for the custom webpack config
             const params = {
                 env: process.env.NODE_ENV,
